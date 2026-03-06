@@ -1,0 +1,151 @@
+
+:root {
+  --bg: #0a0a0f;
+  --surface: #111118;
+  --surface2: #1a1a24;
+  --border: rgba(255,255,255,0.07);
+  --accent: #f59e0b;
+  --accent2: #fbbf24;
+  --text: #f0f0f5;
+  --muted: #6b7280;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:30px 20px;
+}
+
+/* CENTER BOX */
+.box{
+  width:100%;
+  max-width:460px;
+}
+
+/* BRAND at top */
+.brand{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:32px;
+}
+.brand-icon{
+  width:46px;height:46px;
+  background:var(--accent);
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;
+}
+.brand-name{
+  font-family:'Syne',sans-serif;
+  font-size:1.7rem;
+  font-weight:800;
+  letter-spacing:-1px;
+  color:var(--text);
+}
+.brand-name  span{color:var(--accent)}
+
+/* TABS */
+.tabs{
+  display:flex;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:4px;
+  margin-bottom:28px;
+}
+.tab{
+  flex:1;padding:11px;text-align:center;
+  border-radius:9px;cursor:pointer;
+  font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700;
+  color:var(--muted);transition:all .2s;letter-spacing:.3px;
+}
+.tab.on{background:var(--accent);color:#000}
+
+.sec{display:none}.sec.on{display:block}
+
+/* ROLE CARDS */
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px}
+.rc{
+  border:1px solid var(--border);border-radius:10px;padding:15px;
+  cursor:pointer;transition:all .2s;text-align:center;background:var(--surface);
+}
+.rc:hover{border-color:rgba(245,158,11,.4)}
+.rc.on{border-color:var(--accent);background:rgba(245,158,11,.07)}
+.rc .ri{font-size:1.5rem;margin-bottom:6px}
+.rc .rl{font-family:'Syne',sans-serif;font-size:.82rem;font-weight:700;color:var(--muted)}
+.rc.on .rl{color:var(--accent)}
+
+/* REGISTER SUB TABS */
+.subtabs{display:flex;gap:8px;margin-bottom:22px}
+.stab{
+  padding:8px 18px;border:1px solid var(--border);border-radius:8px;
+  cursor:pointer;font-size:.8rem;font-family:'Syne',sans-serif;font-weight:700;
+  color:var(--muted);transition:all .2s;background:var(--surface);
+}
+.stab.on{border-color:var(--accent);color:var(--accent);background:rgba(245,158,11,.07)}
+
+.rf{display:none}.rf.on{display:block}
+
+/* FORM FIELDS */
+.fld{margin-bottom:16px}
+.fld label{
+  display:block;font-size:.75rem;font-weight:500;color:var(--muted);
+  margin-bottom:7px;letter-spacing:.5px;text-transform:uppercase;
+}
+.fld input{
+  width:100%;padding:13px 16px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;color:var(--text);
+  font-family:'DM Sans',sans-serif;font-size:.95rem;
+  transition:border-color .2s,background .2s;outline:none;
+}
+.fld input:focus{border-color:var(--accent);background:var(--surface2)}
+.fld input::placeholder{color:#2d2d3d}
+.fld .hint{font-size:.75rem;color:var(--accent);margin-top:5px}
+
+/* BUTTON */
+.btn{
+  width:100%;padding:14px;background:var(--accent);border:none;
+  border-radius:10px;color:#000;font-family:'Syne',sans-serif;
+  font-size:.95rem;font-weight:700;cursor:pointer;
+  transition:all .2s;letter-spacing:.3px;margin-top:4px;
+}
+.btn:hover{background:var(--accent2);transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+
+/* ALERTS */
+.al{
+  padding:12px 15px;border-radius:9px;font-size:.85rem;
+  margin-bottom:18px;display:none;line-height:1.55;
+}
+.al.err{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#fca5a5}
+.al.ok{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);color:#6ee7b7}
+
+/* SWITCH LINK */
+.sw{text-align:center;margin-top:20px;font-size:.85rem;color:var(--muted)}
+.sw span{color:var(--accent);cursor:pointer;font-weight:500}
+.sw span:hover{text-decoration:underline}
+@media(max-width:480px){
+  body{padding:20px 14px;align-items:flex-start}
+
+  .box{max-width:100%}
+
+  .brand{margin-bottom:22px}
+  .brand-name{font-size:1.4rem}
+  .brand-icon{width:38px;height:38px}
+
+  .tab{font-size:.78rem;padding:9px}
+
+  .roles{grid-template-columns:1fr 1fr}
+  .rc{padding:12px 8px}
+
+  .fld input{padding:11px 13px;font-size:.9rem}
+  .btn{padding:13px}
+}

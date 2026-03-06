@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Owner Dashboard — StorePro</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-l">
+    <div class="nav-logo">Store<span>Lens</span></div>
+    <div class="nav-pill"> OWNER</div>
+  </div>
+  <div class="nav-r">
+    <div class="nav-user">
+      <div class="avatar" id="avt">O</div>
+      <div class="nav-info">
+        <div class="uname" id="uname">Owner</div>
+        <div class="ushop" id="ushop">Shop ID: —</div>
+      </div>
+    </div>
+    <button class="btn-logout" onclick="logout()">Sign Out</button>
+  </div>
+</nav>
+
+<div class="layout">
+  <aside>
+    <div class="aside-label">Overview</div>
+    <div class="nav-item on" onclick="show('dashboard',this)"><span class="ico"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#999999"><path d="M80-120v-80h800v80H80Zm40-120v-280h120v280H120Zm200 0v-480h120v480H320Zm200 0v-360h120v360H520Zm200 0v-600h120v600H720Z"/></svg></span><span class="lbl">Dashboard</span></div>
+    <div class="aside-sep"></div>
+    <div class="aside-label">Products</div>
+    <div class="nav-item" onclick="show('products',this)"><span class="ico"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FDF3D0"><path d="M440-183v-274L200-596v274l240 139Zm80 0 240-139v-274L520-457v274Zm-80 92L160-252q-19-11-29.5-29T120-321v-318q0-22 10.5-40t29.5-29l280-161q19-11 40-11t40 11l280 161q19 11 29.5 29t10.5 40v318q0 22-10.5 40T800-252L520-91q-19 11-40 11t-40-11Zm200-528 77-44-237-137-78 45 238 136Zm-160 93 78-45-237-137-78 45 237 137Z"/></svg></span><span class="lbl">All Products</span></div>
+    <div class="nav-item" onclick="show('add',this)"><span class="ico"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FDF3D0"><path d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM480-80 373-240H160q-33 0-56.5-23.5T80-320v-480q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H587L480-80Zm0-144 64-96h256v-480H160v480h256l64 96Zm0-336Z"/></svg></span><span class="lbl">Add Product</span></div>
+    <div class="nav-item" onclick="show('csv',this)"><span class="ico"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FDF3D0"><path d="M440-200h80v-167l64 64 56-57-160-160-160 160 57 56 63-63v167ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z"/></svg></span><span class="lbl">Import CSV</span></div>
+    <div class="aside-sep"></div>
+    <div class="nav-item" onclick="show('sales',this)">
+      <span class="ico">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FDF3D0">
+          <path d="M80-120v-80h800v80H80Zm40-120v-280h120v280H120Zm200 0v-480h120v480H320Zm200 0v-360h120v360H520Zm200 0v-600h120v600H720Z"/>
+        </svg>
+      </span>
+      <span class="lbl">Sales Chart</span>
+    </div>
+    <div class="aside-sep"></div>
+    <div class="aside-label">Team</div>
+    <div class="nav-item" id="empNav" onclick="show('employees',this)">
+      <span class="ico"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FDF3D0"><path d="M40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm720 0v-120q0-44-24.5-84.5T666-434q51 6 96 20.5t84 35.5q36 20 55 44.5t19 53.5v120H760ZM247-527q-47-47-47-113t47-113q47-47 113-47t113 47q47 47 47 113t-47 113q-47 47-113 47t-113-47Zm466 0q-47 47-113 47-11 0-28-2.5t-28-5.5q27-32 41.5-71t14.5-81q0-42-14.5-81T544-792q14-5 28-6.5t28-1.5q66 0 113 47t47 113q0 66-47 113ZM120-240h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm296.5-343.5Q440-607 440-640t-23.5-56.5Q393-720 360-720t-56.5 23.5Q280-673 280-640t23.5 56.5Q327-560 360-560t56.5-23.5ZM360-240Zm0-400Z"/></svg></span><span class="lbl">Employees</span>
+      <span class="nav-badge" id="pendBadge">0</span>
+    </div>
+  </aside>
+
+  <main>
+    <!-- DASHBOARD -->
+    <div id="pg-dashboard" class="page on">
+      <div class="ph">
+        <div><div class="ph-t">Dashboard</div><div class="ph-s">Your store at a glance</div></div>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="s-ico"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FDF3D0"><path d="M440-183v-274L200-596v274l240 139Zm80 0 240-139v-274L520-457v274Zm-80 92L160-252q-19-11-29.5-29T120-321v-318q0-22 10.5-40t29.5-29l280-161q19-11 40-11t40 11l280 161q19 11 29.5 29t10.5 40v318q0 22-10.5 40T800-252L520-91q-19 11-40 11t-40-11Zm200-528 77-44-237-137-78 45 238 136Zm-160 93 78-45-237-137-78 45 237 137Z"/></svg></div><div class="s-lbl">Total Products</div><div class="s-val" id="ds-total">—</div></div>
+        <div class="stat"><div class="s-ico"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FDF3D0"><path d="M508.5-291.5Q520-303 520-320t-11.5-28.5Q497-360 480-360t-28.5 11.5Q440-337 440-320t11.5 28.5Q463-280 480-280t28.5-11.5ZM440-440h80v-240h-80v240Zm40 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg></div><div class="s-lbl">Low Stock</div><div class="s-val" id="ds-low">—</div></div>
+        <div class="stat"><div class="s-ico"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FDF3D0"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></div><div class="s-lbl">Out of Stock</div><div class="s-val" id="ds-out">—</div></div>
+        <div class="stat accent"><div class="s-ico"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FDF3D0"><path d="M320-160h320v-120q0-66-47-113t-113-47q-66 0-113 47t-47 113v120ZM160-80v-80h80v-120q0-61 28.5-114.5T348-480q-51-32-79.5-85.5T240-680v-120h-80v-80h640v80h-80v120q0 61-28.5 114.5T612-480q51 32 79.5 85.5T720-280v120h80v80H160Z"/></svg></div><div class="s-lbl">Pending Approvals</div><div class="s-val" id="ds-pend">—</div></div>
+      </div>
+      
+    </div>
+
+    <!-- ALL PRODUCTS -->
+    <div id="pg-products" class="page">
+      <div class="ph">
+        <div><div class="ph-t">All Products</div><div class="ph-s">Manage your store inventory</div></div>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Product Name</th><th>Location</th><th>Price</th><th>Stock</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="prodTbody"><tr class="empty-row"><td colspan="7">Loading products…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ADD PRODUCT -->
+    <div id="pg-add" class="page">
+      <div class="ph">
+        <div><div class="ph-t">Add Product</div><div class="ph-s">Add a new item to your store inventory</div></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FDF3D0"><path d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM480-80 373-240H160q-33 0-56.5-23.5T80-320v-480q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H587L480-80Zm0-144 64-96h256v-480H160v480h256l64 96Zm0-336Z"/></svg> Product Details</div>
+        <div class="fgrid">
+          <div class="fld"><label>Product Name *</label><input id="np-name" type="text" placeholder="e.g. Basmati Rice 5kg"></div>
+          <div class="fld"><label>Location in Store *</label><input id="np-loc" type="text" placeholder="e.g. Aisle 3, Shelf B"></div>
+          <div class="fld"><label>Price (₹) *</label><input id="np-amt" type="number" placeholder="0.00" min="0" step="0.01"></div>
+          <div class="fld"><label>Stock Count *</label><input id="np-cnt" type="number" placeholder="0" min="0"></div>
+        </div>
+        <div style="margin-top:20px"><button class="btn-acc" onclick="addProduct()">Add Product →</button></div>
+      </div>
+    </div>
+
+    <!-- CSV IMPORT -->
+    <div id="pg-csv" class="page">
+      <div class="ph">
+        <div><div class="ph-t">Import via CSV</div><div class="ph-s">Bulk upload products from a spreadsheet</div></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FDF3D0"><path d="M480-480ZM202-65l-56-57 118-118h-90v-80h226v226h-80v-89L202-65Zm278-15v-80h240v-440H520v-200H240v400h-80v-400q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H480Z"/></svg> CSV Upload</div>
+        <div class="csv-info">
+          <strong>Required columns (with header row):</strong><br>
+          <code>proName</code> &nbsp;,&nbsp; <code>pro_location</code> &nbsp;,&nbsp; <code>pro_amount</code> &nbsp;,&nbsp; <code>pro_count</code><br><br>
+          Example row: <code>Basmati Rice 5kg, Aisle 3 Row B, 120.00, 50</code>
+        </div>
+        <div class="fld" style="margin-bottom:18px"><label>Select CSV File *</label><input id="csvFile" type="file" accept=".csv"></div>
+        <button class="btn-acc" onclick="uploadCSV()">Upload & Import →</button>
+      </div>
+    </div>
+
+    <!-- SALES CHART — now correctly inside main/layout -->
+    <div id="pg-sales" class="page">
+      <div class="ph">
+        <div>
+          <div class="ph-t">Sales Chart</div>
+          <div class="ph-s">Last 10 days — units sold per product</div>
+        </div>
+        <button class="btn-ghost" onclick="loadSalesChart()">↺ Refresh</button>
+      </div>
+      <div class="card">
+        <div id="chartMsg" style="color:var(--muted);font-size:.875rem">Loading chart…</div>
+        <canvas id="salesCanvas" style="display:none;max-height:400px"></canvas>
+      </div>
+    </div>
+
+    <!-- EMPLOYEES -->
+    <div id="pg-employees" class="page">
+      <div class="ph">
+        <div><div class="ph-t">Employees</div><div class="ph-s">Approve or reject employee requests</div></div>
+        <button class="btn-ghost" onclick="loadEmps()">↺ Refresh</button>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FDF3D0"><path d="M320-160h320v-120q0-66-47-113t-113-47q-66 0-113 47t-47 113v120ZM160-80v-80h80v-120q0-61 28.5-114.5T348-480q-51-32-79.5-85.5T240-680v-120h-80v-80h640v80h-80v120q0 61-28.5 114.5T612-480q51 32 79.5 85.5T720-280v120h80v80H160Z"/></svg> Pending Approval</div>
+        <div id="pendDiv"><div style="color:var(--muted);font-size:.875rem">No pending requests.</div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FDF3D0"><path d="m381-240 424-424-57-56-368 367-169-170-57 57 227 226Zm0 113L42-466l169-170 170 170 366-367 172 168-538 538Z"/></svg>  Approved Employees</div>
+        <div id="appDiv"><div style="color:var(--muted);font-size:.875rem">No employees yet.</div></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="overlay" id="editOverlay">
+  <div class="modal">
+    <h3><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FDF3D0"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg> Edit Product</h3>
+    <input type="hidden" id="e-id">
+    <div class="fgrid" style="margin-bottom:14px">
+      <div class="fld"><label>Product Name</label><input id="e-name" type="text"></div>
+      <div class="fld"><label>Location</label><input id="e-loc" type="text"></div>
+      <div class="fld"><label>Price (₹)</label><input id="e-amt" type="number" step="0.01"></div>
+      <div class="fld"><label>Stock Count</label><input id="e-cnt" type="number" min="0"></div>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-acc" onclick="saveEdit()">Save Changes</button>
+      <button class="btn-ghost" onclick="closeEdit()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="ownerUi.js"></script>
+</body>
+</html>

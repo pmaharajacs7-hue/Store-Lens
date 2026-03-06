@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employee Dashboard — StorePro</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-l">
+    <div class="nav-logo">Store<span>Lens</span></div>
+    <div class="nav-pill"> EMPLOYEE</div>
+  </div>
+  <div class="nav-r">
+    <div class="nav-user">
+      <div class="avatar" id="avt">E</div>
+      <div>
+        <div class="uname" id="uname">Employee</div>
+        <div class="ushop" id="ushop">Shop ID: —</div>
+      </div>
+    </div>
+    <button class="btn-logout" onclick="logout()">Sign Out</button>
+  </div>
+</nav>
+
+<main>
+  <div class="hero">
+    <div class="hero-title"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#ffff"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg> Find Product</div>
+    <div class="hero-sub">Search by name to instantly locate any item in the store</div>
+    <div class="search-row">
+      <input class="search-input" id="sq" type="text" placeholder="Type a product name…"
+        oninput="onInput()" onkeydown="if(event.key==='Enter')doSearch()">
+      <button class="btn-mic" id="micBtn" onclick="toggleMic()" title="Voice Search"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FDF3D0"><path d="M395-435q-35-35-35-85v-240q0-50 35-85t85-35q50 0 85 35t35 85v240q0 50-35 85t-85 35q-50 0-85-35Zm85-205Zm-40 520v-123q-104-14-172-93t-68-184h80q0 83 58.5 141.5T480-320q83 0 141.5-58.5T680-520h80q0 105-68 184t-172 93v123h-80Zm68.5-371.5Q520-503 520-520v-240q0-17-11.5-28.5T480-800q-17 0-28.5 11.5T440-760v240q0 17 11.5 28.5T480-480q17 0 28.5-11.5Z"/></svg></button>
+      <button class="btn-search" onclick="doSearch()">Search →</button>
+    </div>
+    <div class="voice-hint" id="vhint">
+      <span class="dot"></span>
+      <span id="vtext">Press<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FDF3D0"><path d="M395-435q-35-35-35-85v-240q0-50 35-85t85-35q50 0 85 35t35 85v240q0 50-35 85t-85 35q-50 0-85-35Zm85-205Zm-40 520v-123q-104-14-172-93t-68-184h80q0 83 58.5 141.5T480-320q83 0 141.5-58.5T680-520h80q0 105-68 184t-172 93v123h-80Zm68.5-371.5Q520-503 520-520v-240q0-17-11.5-28.5T480-800q-17 0-28.5 11.5T440-760v240q0 17 11.5 28.5T480-480q17 0 28.5-11.5Z"/></svg> to search by voice</span>
+    </div>
+  </div>
+
+  <div class="session-card" id="sessionCard">
+    <div class="sess-item"><div class="sess-label">Logged in as</div><div class="sess-val" id="s-name">—</div></div>
+    <div class="sess-sep"></div>
+    <div class="sess-item"><div class="sess-label">Your Shop</div><div class="sess-val" id="s-shop">—</div></div>
+    <div class="sess-sep"></div>
+    <div class="sess-item"><div class="sess-label">Access Level</div><div class="sess-val">Search & Sell</div></div>
+  </div>
+
+  <div id="results" style="display:none">
+    <div class="res-header">
+      <div class="res-title" id="res-title">Results</div>
+      <div class="res-count" id="res-count"></div>
+    </div>
+    <div class="prod-grid" id="prodGrid"></div>
+  </div>
+
+  <div id="emptyState" style="display:none">
+    <div class="empty"><div class="e-ico"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#ffff"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg></div><p id="emptyMsg">No products found.</p></div>
+  </div>
+
+  <div id="initState" class="init-state">
+    <div class="big"></div>
+    <h3>Ready to help</h3>
+    <p>Type a product name or use voice search to find its location in the store.</p>
+  </div>
+</main>
+
+<!-- SELL MODAL -->
+<div class="overlay" id="sellOverlay">
+  <div class="modal">
+    <div class="modal-title"> <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#D3E0E3"><path d="M223.5-103.5Q200-127 200-160t23.5-56.5Q247-240 280-240t56.5 23.5Q360-193 360-160t-23.5 56.5Q313-80 280-80t-56.5-23.5Zm400 0Q600-127 600-160t23.5-56.5Q647-240 680-240t56.5 23.5Q760-193 760-160t-23.5 56.5Q713-80 680-80t-56.5-23.5ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg> Confirm Sale</div>
+    <div class="modal-sub" id="sell-pname">Product Name</div>
+
+    <div class="modal-info">
+      <div class="modal-info-row">
+        <span class="lbl"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#D3E0E3"><path d="M536.5-503.5Q560-527 560-560t-23.5-56.5Q513-640 480-640t-56.5 23.5Q400-593 400-560t23.5 56.5Q447-480 480-480t56.5-23.5ZM480-186q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg> Location</span>
+        <span class="val" id="sell-loc" style="color:var(--accent)">—</span>
+      </div>
+      <div class="modal-info-row">
+        <span class="lbl"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#D3E0E3"><path d="M200-80q-33 0-56.5-23.5T120-160v-451q-18-11-29-28.5T80-680v-120q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v120q0 23-11 40.5T840-611v451q0 33-23.5 56.5T760-80H200Zm0-520v440h560v-440H200Zm-40-80h640v-120H160v120Zm200 280h240v-80H360v80Zm120 20Z"/></svg> Available Stock</span>
+        <span class="val" id="sell-available">—</span>
+      </div>
+      <div class="modal-info-row">
+        <span class="lbl"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#D3E0E3"><path d="M531-260h96v-3L462-438l1-3h10q54 0 89.5-33t43.5-77h40v-47h-41q-3-15-10.5-28.5T576-653h70v-47H314v57h156q26 0 42.5 13t22.5 32H314v47h222q-6 20-23 34.5T467-502H367v64l164 178ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg> Price per unit</span>
+        <span class="val" id="sell-price">—</span>
+      </div>
+    </div>
+
+    <div class="modal-fld">
+      <label>Quantity to Sell *</label>
+      <input id="sell-qty" type="number" min="1" placeholder="Enter quantity"
+        onkeydown="if(event.key==='Enter')confirmSell()">
+    </div>
+    <div class="modal-err" id="sell-err"></div>
+
+    <div class="modal-btns">
+      <button class="btn-confirm" onclick="confirmSell()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#D3E0E3"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg> Confirm Sale</button>
+      <button class="btn-cancel" onclick="closeSell()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#D3E0E3"><path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg> Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="employeSearch.js"></script>
+</body>
+</html>

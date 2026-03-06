@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Store Lens — Sign In</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="box">
+
+  <!-- STORE LENS BRAND -->
+  <div class="brand">
+    <div class="brand-icon"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#ffff"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg></div>
+    <div class="brand-name">Store<span>Lens</span></div>
+  </div>
+
+  <!-- SIGN IN / REGISTER TABS -->
+  <div class="tabs">
+    <div class="tab on" onclick="go('login')">Sign In</div>
+    <div class="tab" onclick="go('reg')">Register</div>
+  </div>
+
+  <!-- LOGIN -->
+  <div id="s-login" class="sec on">
+    <div id="lal" class="al"></div>
+
+    <div class="roles">
+      <div class="rc on" onclick="setRole('OWNER',this)"><div class="ri"></div><div class="rl">Owner</div></div>
+      <div class="rc" onclick="setRole('EMPLOYEE',this)"><div class="ri"></div><div class="rl">Employee</div></div>
+    </div>
+
+    <div class="fld">
+      <label>Phone Number</label>
+      <input id="lp" type="text" placeholder="Your phone number" onkeydown="if(event.key==='Enter')login()">
+    </div>
+    <div class="fld">
+      <label>Password</label>
+      <input id="lw" type="password" placeholder="Your password" onkeydown="if(event.key==='Enter')login()">
+    </div>
+
+    <button class="btn" onclick="login()">Sign In →</button>
+    <div class="sw">No account? <span onclick="go('reg')">Register here</span></div>
+  </div>
+
+  <!-- REGISTER -->
+  <div id="s-reg" class="sec">
+    <div id="ral" class="al"></div>
+
+    <div class="subtabs">
+      <div class="stab on" onclick="setRT('owner',this)">As Owner</div>
+      <div class="stab" onclick="setRT('emp',this)">As Employee</div>
+    </div>
+
+    <!-- Owner Form -->
+    <div id="rf-own" class="rf on">
+      <div class="fld"><label>Full Name</label><input id="on" type="text" placeholder="Your full name"></div>
+      <div class="fld"><label>Phone Number</label><input id="op" type="text" placeholder="Phone number"></div>
+      <div class="fld"><label>Password</label><input id="ow" type="password" placeholder="Min 6 characters"></div>
+      <div class="fld"><label>Confirm Password</label><input id="oc" type="password" placeholder="Repeat password"></div>
+      <button class="btn" onclick="regOwner()">Create Owner Account →</button>
+    </div>
+
+    <!-- Employee Form -->
+    <div id="rf-emp" class="rf">
+      <div class="fld"><label>Full Name</label><input id="en" type="text" placeholder="Your full name"></div>
+      <div class="fld"><label>Phone Number</label><input id="ep" type="text" placeholder="Phone number"></div>
+      <div class="fld">
+        <label>Shop ID</label>
+        <input id="es" type="number" placeholder="Given by your owner">
+        <div class="hint">Ask your shop owner for this ID</div>
+      </div>
+      <div class="fld"><label>Password</label><input id="ew" type="password" placeholder="Min 6 characters"></div>
+      <div class="fld"><label>Confirm Password</label><input id="ec" type="password" placeholder="Repeat password"></div>
+      <button class="btn" onclick="regEmp()">Register as Employee →</button>
+    </div>
+
+    <div class="sw">Already registered? <span onclick="go('login')">Sign in</span></div>
+  </div>
+
+</div>
+
+<script src="validate.js" ></script>
+</body>
+</html>
