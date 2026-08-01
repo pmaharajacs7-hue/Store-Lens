@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://store-lens-r6l8.onrender.com";
+const API = "https://store-lens-r6l8.onrender.com";
 const token=localStorage.getItem('token');
 const role=localStorage.getItem('role');
 
